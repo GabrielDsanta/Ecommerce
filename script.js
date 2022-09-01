@@ -194,15 +194,17 @@ function update(id2, newPrice){
 
 function erase(finder){
     var base = 0
-    var idComplementar = [0]
+    var idComplementar = 0
 
     finder = prompt("Qual o ID do produto ?")
     for(var index3 = 0; index3 < id.length; index3++){
         if(finder == id[base]){
-            idComplementar[base] = id[base + 1]
-            idComplementar[base] = price[base + 1]
-            idComplementar[base] = rating[base + 1]
-            idComplementar[base] = product[base + 1]
+            id[base] = idComplementar
+            
+            idComplementar = id[base + 1]
+            idComplementar = price[base + 1]
+            idComplementar = rating[base + 1]
+            idComplementar = product[base + 1]
 
             id.length--
             price.length--
