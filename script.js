@@ -4,7 +4,8 @@ var price = []
 var id = []
 var product = []
 var rating = []
-
+var cart = []
+var quantidade = 0
 
 var index = 0
 var choice = true
@@ -60,7 +61,8 @@ while(choice){
          }
 
          if(choice == "6"){
-            finish()
+
+            addCart()
          }
     }
 
@@ -191,6 +193,24 @@ function update(id2, newPrice){
     }
 }
 
+function addCart(name, amount){
+    name = prompt("Qual nome do produto que você deseja adicionar ao carrinho ?")
+    for(var contadorcart = 0; contadorcart< cart.length; contadorcart++){
+        if(name == cart[contadorcart]){
+            amount++
+        }
+        
+        else{
+            cart[contadorcart] = name
+            amount = prompt("Qual a quantidade de produto que você deseja adicionar ao carrinho ?")
+            quantidade[contadorcart] = amount
+        }
+    }
+}
+
+function removeCart(){
+    
+}
 
 function erase(finder){
     var base = 0
