@@ -11,7 +11,7 @@ var index = 0
 var choice = true
 var choice2 
 var choice3
-var choice4
+var choice4 = 0
 
 
 while(choice){
@@ -69,7 +69,7 @@ while(choice){
             }
 
             if(choice4 == "2"){
-                removeCart
+                removeCart()
             }
 
             if(choice4 == "3"){
@@ -77,13 +77,11 @@ while(choice){
             }
 
             if(choice4 == "4"){
-                totalValue()
+                cartList()
             }
          }
 
          if(choice == "7"){
-
-            
          }
     }
 
@@ -93,7 +91,7 @@ while(choice){
 function cadastro(){
     id[index] = prompt("Cadastre o ID do produto")
     product[index] = prompt("Cadastre o nome do produto")
-    price[index] = Math.round(prompt("Cadastre o preço do produto"))
+    price[index] = parseInt((prompt("Cadastre o preço do produto")))
     rating[index] = parseInt(prompt("Cadastre a avaliação do produto"))
     index++
 }
@@ -214,22 +212,30 @@ function update(id2, newPrice){
     }
 }
 
-function addCart(name, amount){
+function addCart(name, amount, base, choice){
+    choice = true
+    base = 0
     name = prompt("Qual nome do produto que você deseja adicionar ao Carrinho ?")
-    for(var contadorcart = 0; contadorcart < cart.length; contadorcart++){
-        if(name == cart[contadorcart]){
+    while(choice){
+        if(name == cart[base]){
+            amount = prompt("Qual a quantidade de produto que você deseja adicionar ao Carrinho ?")
             amount++
+            quantidade[base] = amount
+            base++
+            choice = false
         }
         
         else{
-            cart[contadorcart] = name
+            cart[base] = name
             amount = prompt("Qual a quantidade de produto que você deseja adicionar ao Carrinho ?")
-            quantidade[contadorcart] = amount
+            quantidade[base] = amount
+            base++
+            choice = false
         }
     }
 }
 
-function removeCart(productName, productAmount ){
+function removeCart(productName, productAmount){
     var auxValue = 0
     productName = prompt("Qual nome do produto que você deseja remover ?")
     for(var contadorcart2 = 0; contadorcart2 < cart.length; contadorcart2++){
@@ -252,16 +258,28 @@ function removeCart(productName, productAmount ){
     }
 }
 
-function totalValue(total){
-    for(var indexTotal = 0; indexTotal < price.length; indexTotal++){
-        total = price[indexTotal] + price[indexTotal + 1]
-        total = total + price[indexTotal + 1]
+function totalValue(total, choice, base){
+    choice = true
+    base = 0
+    total = parseInt(0)
+    while(choice){
+        if(price.length == 0){
+            total = price[base]
+            choice = false      
+        }
+
+        if(price.length > 0){
+            total = price[base] + price[base + 1]
+            price[base + 1] = total
+            choice = false
+        }
+
     }
-    return total
+    return alert(`Valor Tota: ${total}`)
 }
 
 function cartList(){
-    
+    alert(`${cart}  Valor Total: ${totalValue()}`)
 }
 
 function erase(finder){
