@@ -11,6 +11,7 @@ var index = 0
 var choice = true
 var choice2 
 var choice3
+var choice4
 
 
 while(choice){
@@ -18,7 +19,7 @@ while(choice){
     dados()
     
     function dados(){
-        var choice = prompt("1 // Cadastrar Produto /// 2 Buscar Produto // 3 Exibir Produtos // 4 Atualizar Produto // 5 Deletar produto // 6 Finalizar Programa")
+        var choice = prompt("1 // Cadastrar Produto /// 2 Buscar Produto // 3 Exibir Produtos // 4 Atualizar Produto // 5 Deletar produto // 6 Acessar o Carrinho // ")
 
         if(choice == "1"){
                cadastro()
@@ -61,8 +62,28 @@ while(choice){
          }
 
          if(choice == "6"){
+            choice4 = prompt("1 // Adicionar ao Carrinho // 2 Remover Do Carrinho // 3 Ver O Valor Total Do Carrinho // 4 Acessar o Carrinho")
 
-            addCart()
+            if(choice4 == "1"){
+                addCart()
+            }
+
+            if(choice4 == "2"){
+                removeCart
+            }
+
+            if(choice4 == "3"){
+                totalValue()
+            }
+
+            if(choice4 == "4"){
+                totalValue()
+            }
+         }
+
+         if(choice == "7"){
+
+            
          }
     }
 
@@ -194,21 +215,52 @@ function update(id2, newPrice){
 }
 
 function addCart(name, amount){
-    name = prompt("Qual nome do produto que você deseja adicionar ao carrinho ?")
-    for(var contadorcart = 0; contadorcart< cart.length; contadorcart++){
+    name = prompt("Qual nome do produto que você deseja adicionar ao Carrinho ?")
+    for(var contadorcart = 0; contadorcart < cart.length; contadorcart++){
         if(name == cart[contadorcart]){
             amount++
         }
         
         else{
             cart[contadorcart] = name
-            amount = prompt("Qual a quantidade de produto que você deseja adicionar ao carrinho ?")
+            amount = prompt("Qual a quantidade de produto que você deseja adicionar ao Carrinho ?")
             quantidade[contadorcart] = amount
         }
     }
 }
 
-function removeCart(){
+function removeCart(productName, productAmount ){
+    var auxValue = 0
+    productName = prompt("Qual nome do produto que você deseja remover ?")
+    for(var contadorcart2 = 0; contadorcart2 < cart.length; contadorcart2++){
+        if(productName == cart[contadorcart2]){
+            productAmount = prompt("Qual a quantidade que você deseja remover do Carrinho ?")
+            if(productAmount >= quantidade[contadorcart2]){
+                quantidade[contadorcart2] = auxValue
+
+                auxValue = quantidade[contadorcart2 + 1]
+                auxValue = cart[contadorcart2 + 1]
+
+                cart.length--
+                quantidade.length--
+            }
+
+            else{
+                quantidade[contadorcart2] = productAmount
+            }
+        }
+    }
+}
+
+function totalValue(total){
+    for(var indexTotal = 0; indexTotal < price.length; indexTotal++){
+        total = price[indexTotal] + price[indexTotal + 1]
+        total = total + price[indexTotal + 1]
+    }
+    return total
+}
+
+function cartList(){
     
 }
 
