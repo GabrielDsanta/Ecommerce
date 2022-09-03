@@ -5,7 +5,7 @@ var id = []
 var product = []
 var rating = []
 var cart = []
-var quantidade = 0
+var quantidade = []
 
 var index = 0
 var choice = true
@@ -82,6 +82,7 @@ while(choice){
          }
 
          if(choice == "7"){
+            finish()
          }
     }
 
@@ -218,8 +219,7 @@ function addCart(name, amount, base, choice){
     name = prompt("Qual nome do produto que você deseja adicionar ao Carrinho ?")
     while(choice){
         if(name == cart[base]){
-            amount = prompt("Qual a quantidade de produto que você deseja adicionar ao Carrinho ?")
-            amount++
+            amount = parseInt(prompt("Qual a quantidade de produto que você deseja adicionar ao Carrinho ?"))
             quantidade[base] = amount
             base++
             choice = false
@@ -227,7 +227,7 @@ function addCart(name, amount, base, choice){
         
         else{
             cart[base] = name
-            amount = prompt("Qual a quantidade de produto que você deseja adicionar ao Carrinho ?")
+            amount = parseInt(prompt("Qual a quantidade de produto que você deseja adicionar ao Carrinho ?"))
             quantidade[base] = amount
             base++
             choice = false
@@ -258,24 +258,17 @@ function removeCart(productName, productAmount){
     }
 }
 
-function totalValue(total, choice, base){
-    choice = true
-    base = 0
-    total = parseInt(0)
-    while(choice){
-        if(price.length == 0){
-            total = price[base]
-            choice = false      
-        }
+function totalValue(){
 
-        if(price.length > 0){
-            total = price[base] + price[base + 1]
-            price[base + 1] = total
-            choice = false
+    var total = 0
+    for(var totalcontador = 0; totalcontador < cart.length; totalcontador++){
+        for(var totalcontador2 = 0; totalcontador2 < product.length; totalcontador2++){
+            if(cart[totalcontador] == product[totalcontador2]){
+                total = total + (price[totalcontador2] * quantidade[totalcontador]) 
+            }
         }
-
     }
-    return alert(`Valor Tota: ${total}`)
+    return total
 }
 
 function cartList(){
