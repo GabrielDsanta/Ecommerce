@@ -12,6 +12,7 @@ var choice = true
 var choice2 
 var choice3
 var choice4 = 0
+var base = 0
 
 
 while(choice){
@@ -62,7 +63,7 @@ while(choice){
          }
 
          if(choice == "6"){
-            choice4 = prompt("1 // Adicionar ao Carrinho // 2 Remover Do Carrinho // 3 Ver O Valor Total Do Carrinho // 4 Acessar o Carrinho")
+            choice4 = prompt("1 // Adicionar ao Carrinho // 2 Remover Do Carrinho // 3 Ver O Valor Total Do Carrinho // 4 Acessar o Carrinho // Enter para sair do Carrinho")
 
             if(choice4 == "1"){
                 addCart()
@@ -77,7 +78,7 @@ while(choice){
             }
 
             if(choice4 == "4"){
-                cartList()
+                cartList(base)
             }
          }
 
@@ -85,7 +86,6 @@ while(choice){
             finish()
          }
     }
-
 }
 
 
@@ -98,10 +98,10 @@ function cadastro(){
 }
 
 
-function searchID(id1){
+function searchID(){
     var comparador = 0
 
-    id1 = prompt("Qual o ID do produto ?")
+    var id1 = prompt("Qual o ID do produto ?")
 
     for(var contador2 = 0; contador2 < id.length; contador2++){
         
@@ -117,10 +117,10 @@ function searchID(id1){
 }
 
 
-function searchName(productName){
+function searchName(){
     var comparador2 = 0
 
-    productName = prompt("Qual o nome do produto ?")
+    var productName = prompt("Qual o nome do produto ?")
 
     for(var contador2 = 0; contador2 < product.length; contador2++){
         
@@ -135,8 +135,8 @@ function searchName(productName){
 }
 
 
-function exposeByID(MaiorID){
-    MaiorID = 0
+function exposeByID(){
+    var MaiorID = 0
 
     for(var contador3 = 0; contador3 < id.length; contador3++){
         for(var contador4 = 0; contador4 < id.length - 1; contador4++){
@@ -152,9 +152,10 @@ function exposeByID(MaiorID){
 }
 
 
-function exposeByPrice(MaiorValor, Produto){
+function exposeByPrice(){
 
-   MaiorValor = Math.round(0)
+   var MaiorValor = Math.round(0)
+   var Produto
 
     for(var contador5 = 0; contador5 < price.length; contador5++){
         for(var contador6 = 0; contador6 < price.length - 1; contador6++){
@@ -174,9 +175,10 @@ function exposeByPrice(MaiorValor, Produto){
 }
 
 
-function exposeByRating(MaiorRating, RatingBase){
+function exposeByRating(){
 
-    MaiorRating = parseInt(0)
+    var MaiorRating = parseInt(0)
+    var RatingBase
 
     for(var contador7 = 0; contador7 < rating.length; contador7++){
         for(var contador8 = 0; contador8 < rating.length - 1; contador8++){
@@ -196,15 +198,22 @@ function exposeByRating(MaiorRating, RatingBase){
 }
 
 
-function update(id2, newPrice){
+function update(){
     var comparador3 = 0
+    var newPrice
+    var auxProduct 
 
-    id2 = prompt("Qual o ID do produto ?")
+    var id2 = prompt("Qual o ID do produto ?")
     for(var index2 = 0; index2 < id.length; index2++){
 
         if(id2 == id[index2]){
             newPrice = prompt("Digite o valor alterado")
             price[index2] = newPrice
+            if(price[index2] > price[index2 + 1]){
+                auxProduct =  price[index2 + 1] 
+                price[index2 + 1] = price[index2]
+                price[index2] = auxProduct
+            }
         }
 
         else{
@@ -213,16 +222,18 @@ function update(id2, newPrice){
     }
 }
 
-function addCart(name, amount, base, choice){
-    choice = true
-    base = 0
-    name = prompt("Qual nome do produto que você deseja adicionar ao Carrinho ?")
-    while(choice){
+function addCart(){
+
+    var choiceCart = true
+    var amount
+
+    var name = prompt("Qual nome do produto que você deseja adicionar ao Carrinho ?")
+    while(choiceCart){
         if(name == cart[base]){
             amount = parseInt(prompt("Qual a quantidade de produto que você deseja adicionar ao Carrinho ?"))
             quantidade[base] = amount
             base++
-            choice = false
+            choiceCart = false
         }
         
         else{
@@ -230,7 +241,7 @@ function addCart(name, amount, base, choice){
             amount = parseInt(prompt("Qual a quantidade de produto que você deseja adicionar ao Carrinho ?"))
             quantidade[base] = amount
             base++
-            choice = false
+            choiceCart = false
         }
     }
 }
@@ -278,7 +289,8 @@ function cartList(){
     alert(`{${cart}}  Valor Total: $${totalValue()}`)
 }
 
-function erase(finder){
+function erase(){
+    var finder
     var base = 0
     var idComplementar = 0
 
