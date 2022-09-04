@@ -19,7 +19,7 @@ while(choice){
     dados()
     
     function dados(){
-        var choice = prompt("1 // Cadastrar Produto /// 2 Buscar Produto // 3 Exibir Produtos // 4 Atualizar Produto // 5 Deletar produto // 6 Acessar o Carrinho // ")
+        var choice = prompt("1 // Cadastrar Produto /// 2 Buscar Produto // 3 Exibir Produtos // 4 Atualizar Produto // 5 Deletar produto // 6 Acessar o Carrinho // 7 Finalizar Programa")
 
         if(choice == "1"){
                cadastro()
@@ -73,7 +73,7 @@ while(choice){
             }
 
             if(choice4 == "3"){
-                totalValue()
+                showTotalValue()
             }
 
             if(choice4 == "4"){
@@ -235,24 +235,23 @@ function addCart(name, amount, base, choice){
     }
 }
 
-function removeCart(productName, productAmount){
+function removeCart(){
     var auxValue = 0
-    productName = prompt("Qual nome do produto que você deseja remover ?")
+    var productName = prompt("Qual nome do produto que você deseja remover ?")
     for(var contadorcart2 = 0; contadorcart2 < cart.length; contadorcart2++){
         if(productName == cart[contadorcart2]){
-            productAmount = prompt("Qual a quantidade que você deseja remover do Carrinho ?")
+            var productAmount = prompt("Qual a quantidade que você deseja remover do Carrinho ?")
             if(productAmount >= quantidade[contadorcart2]){
                 quantidade[contadorcart2] = auxValue
 
                 auxValue = quantidade[contadorcart2 + 1]
-                auxValue = cart[contadorcart2 + 1]
 
                 cart.length--
                 quantidade.length--
             }
 
             else{
-                quantidade[contadorcart2] = productAmount
+                quantidade[contadorcart2] = quantidade[contadorcart2] - productAmount
             }
         }
     }
@@ -271,8 +270,12 @@ function totalValue(){
     return total
 }
 
+function showTotalValue(){
+    alert(`Valor Total: ${totalValue()}`)
+}
+
 function cartList(){
-    alert(`${cart}  Valor Total: ${totalValue()}`)
+    alert(`{${cart}}  Valor Total: $${totalValue()}`)
 }
 
 function erase(finder){
